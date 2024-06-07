@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        *{
+            
+            margin: 0px;
+            padding: 0px;
+        }
+        .head{
+            background-color: rgb(132, 167, 236);
+            border-radius: 10px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(239, 224, 55);
+        }
+        .head:hover{
+            background-color: lightseagreen;
+            color:  rgb(229, 236, 35);
+        }
+        .content{
+        
+            width: 70%;
+            padding: 20px;
+            margin: auto;
+            margin-top: 20px;
+            border-radius: 20px;
+            background-color: rgb(247, 229, 136);
+            box-shadow: 10px 10px lightseagreen;
+        }
+        .centre{
+             width: 40%;
+            margin: auto; 
+            margin-top: 40px;
+        }
+        .btn{
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .adding-style{
+            margin-top: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: rgb(165, 217, 217);
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+
+        }
+
+    </style>
+    <script>
+        $(document).ready(()=>{
+            $("#sbmt").click(()=>{
+                var value1 =  $("#name").val();               
+                var value2 =  $("#add").val();
+                var value3 =  $("#mail").val();
+                var value4 =  $("#course").val();
+                var value5 =  $("#subject").val();
+                if(value1.trim().length===0){
+                    var test=" Enter Name <br>";
+                    $(".errname").html(test);
+                }
+                if(value2.trim().length===0){
+                    var test=" Enter Address <br>";
+                    $(".erradd").html(test);
+                }
+                if(value3.trim().length===0){
+                    var test=" Enter Address <br>";
+                    $(".errmail").html(test);
+                }
+                if(value4.trim().length===0){
+                    var test=" Enter Address <br>";
+                    $(".errcourse").html(test);
+                }
+                if(value5.trim().length===0){
+                    var test=" Enter Address <br>";
+                    $(".errsubject").html(test);
+                }
+                else{
+                    var ch=""
+                    $("input[name=subject]").each((index,element)=>{
+                        ch=ch+$(element).val()+" , ";
+                    })
+                    var data = `Name: ${value1} <br> Address:  ${value2}  <br>  Email: ${value3}  <br> Courses:  ${value4} <br> Subject: ${ch}`;
+                    $(".addinto").html(data);
+
+                } 
+            })
+            let count=1;
+            $("#more").on("click",()=>{
+         
+                var clone = $("#subject").clone();
+                $(clone).attr("id","subject"+count);
+                $(clone).val("");
+                count++;
+                $(".form-test").append(clone);
+                $(".form-test").append("<br>");
+
+            })
+        })
+
+
+
+    </script>
+</head>
+<body>
+    <div class="content">
+    <form class="form-group centre form-test">
+        <h2 class="head">ENTER THE DETAILS</h2>
+        Name : <input type="text" class="form-control"  id="name" name="name" required>
+        <span style="color: red;" class="errname"></span>
+        Address : <input type="text" class="form-control"  id="add" name="add" required>
+        <span style="color: red;" class="erradd"></span>
+        Email : <input type="email" class="form-control"  id="mail" name="mail" required>
+        <span style="color: red;" class="errmail"></span>
+        Courses : <input type="text" class="form-control"  id="course" name="course" required>
+        <span style="color: red;" class="errcourse"></span>
+        Subject : <input type="text" class="form-control"  id="subject" name="subject" required>
+        <span style="color: red;" class="errsubject"></span>
+    </form>
+    <div class="buttons">
+        <button type="button"  class="btn btn-primary" id="sbmt">Submit</button>
+        <button type="button"  class="btn btn-success" id="more">Add More</button>
+    </div>
+</div>
+<div class="addinto adding-style"></div>
+    
+</body>
+</html>
